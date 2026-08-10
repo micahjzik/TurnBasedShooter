@@ -5,13 +5,23 @@ using UnityEngine;
 public class MouseWorld : MonoBehaviour
 {
     private Unit unit;
-    private void Update()
+    private static MouseWorld instance;
+    
+    [SerializeField] private LayerMask mousePlaneLayerMask;
+    
+    private void Awake()
     {
-        RaycastHit hit;
+        instance = this;
+    }
+    private void Update()
+    { 
+        transform.position = GetPosition();
+    }
+
+    public static Vector3 GetPosition()
+    {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit))
-        {
-            
-        }
+        Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue, instance.mousePlaneLayerMask);
+        return raycastHit.point;
     }
 }
