@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MouseWorld : MonoBehaviour
 {
-    private Unit unit;
     private static MouseWorld instance;
     
     [SerializeField] private LayerMask mousePlaneLayerMask;
